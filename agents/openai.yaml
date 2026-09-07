@@ -1,0 +1,4 @@
+interface:
+  display_name: "Junnic video cape"
+  short_description: "将本地视频拆解为可复制的 Seedance 2.5 中文提示词"
+  default_prompt: "分析我提供的本地视频，按 Junnic video cape 规则输出可直接复制的 Seedance 2.5 提示词。"
