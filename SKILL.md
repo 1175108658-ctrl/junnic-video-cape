@@ -64,6 +64,19 @@ Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedan
 - Do not append a new reaction or punchline after the user's selected endpoint. End on the exact visible state the user chose, even when an earlier draft contained an additional closing beat.
 - When the user revises dialogue, amount, height, time, role, or prop behavior for generation, use that revised version in the active copy-ready prompt and retain the source/adaptation classification in the analysis record.
 
+## Round 9 Calibration: Montage And Capacity
+
+- Classify the editorial form before writing the beat map: single-scene dialogue, intercut dialogue, day-in-the-life montage, insert-heavy product or pet sequence, or recorded-screen material. A fast lifestyle diary may contain many hard cuts while still being one chronological story arc.
+- Treat automatic scene candidates as evidence of visual changes only. They are not generation boundaries. First group adjacent cuts into narrative units such as morning routine, car banter, prank, gift exchange, pet care, and dinner; then fit the minimum number of independent submissions required by the source duration.
+- Calculate the minimum 30-second block count with `ceil(source_duration / 30)`. For a source close to an exact multiple, keep each rolling block near capacity and let a boundary cross a short insert when that preserves the complete joke, line, reaction, or daily-routine unit. A hard cut by itself is not a reason to start a new block.
+- In a montage block, write a compact chain of executable beats in playback order: framing and camera position, visible action, prop continuity, expression or body reaction, then spoken line only when mouth movement or reliable audio supports it. Preserve the rapid rhythm instead of forcing every cut into shot-reverse-shot dialogue.
+- Separate three layers whenever on-screen text appears: source graphic or time card, audible speech, and visible action. Exclude the graphic from the generated frame, retain its semantic time-of-day change only when it affects continuity, and never assign a subtitle or title to a character without mouth or audio evidence.
+- For noisy or weak transcription, privilege visible action and clearly intelligible phrases. Use a short natural paraphrase only when the exact wording is uncertain, and mark the line as adapted in the analysis sheet rather than presenting it as a verified quote.
+- Lock the supplied human references separately from generated supporting subjects. A pet, background extra, product package, or furniture prop is generated from the written continuity description unless the user supplied a reference image for it. Keep the same species, color, size, placement, and behavior across every block where it recurs.
+- Preserve the source media grammar. For vertical live-action social-video material, keep 9:16 framing, handheld or fixed-phone height, ordinary home lighting, quick inserts, and direct-to-camera energy. Do not turn a casual montage into a polished cinematic scene unless the user asks for that creative override.
+- Add story-bearing atmosphere once per narrative unit after the concrete layout. Describe the social energy through an observable contrast such as a couple treating household chores as a playful power contest, a performative gift reveal, or a husband using pet care to compete for attention. Return immediately to renderable action, expression, eyeline, and dialogue.
+- Maintain a calibration loop until the user says the iteration is finished. Keep the source-fact sheet, creative-override sheet, and user-feedback classification for every new round; update the skill only from repeated or clearly demonstrated failures, and preserve earlier round artifacts.
+
 ## Quality Check
 
 Before delivery, confirm:
@@ -75,3 +88,5 @@ Before delivery, confirm:
 - Dialogue speaker, source names, relationships, scene order, day/night state, and prop continuity agree with the inspected media.
 - Weather layer (source or creative override), numeric facts, reference count, internal-versus-spoken delivery, deceptive behavior, and reveal camera direction have each received an explicit verification pass.
 - The final artifact is linked with its absolute filesystem path and the verification scope is stated.
+- The editorial form is named in the analysis, automatic hard cuts are not mistaken for submission boundaries, and the minimum block count follows the exact source duration.
+- For montage material, every block contains a complete chain of visible beats, while graphic text, spoken dialogue, and inferred story meaning remain separate.
