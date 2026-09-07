@@ -55,6 +55,15 @@ Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedan
 - Camera ownership is written explicitly before each line: name the viewing character or over-shoulder direction, then the visible speaker, then the reaction. A room-wide establishing frame can reset the spatial grammar before the next close-up.
 - Props can carry the joke or reveal. Documents, microphones, pen marks, and a character's hand position should be placed in the frame before the line that gives them narrative meaning.
 
+## Round 8 Calibration
+
+- A user may supply a scene reference image alongside character references. Bind it explicitly as a scene/layout reference, and keep the character-reference count separate from the scene-reference count.
+- A strong opening may begin on a character close-up or prop action instead of a wide establishing frame. Establish the room through the visible desk, bed, window, lamp, files, or other fixed elements inside that first shot.
+- Preserve off-screen dialogue and voice-over when the source or user prompt places the speaker outside the current frame. State the visible listener's reaction and the audio source separately.
+- Combine an action with the line it motivates when they occur as one beat, such as a doctor touching an abdomen while asking the follow-up question. Avoid splitting one physical action into unrelated prose units.
+- Do not append a new reaction or punchline after the user's selected endpoint. End on the exact visible state the user chose, even when an earlier draft contained an additional closing beat.
+- When the user revises dialogue, amount, height, time, role, or prop behavior for generation, use that revised version in the active copy-ready prompt and retain the source/adaptation classification in the analysis record.
+
 ## Quality Check
 
 Before delivery, confirm:
