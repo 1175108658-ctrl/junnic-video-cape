@@ -5,7 +5,7 @@ description: "Analyze a local MP4 shot by shot and write a copy-ready Chinese Se
 
 # Junnic Video Cape
 
-Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedance 2.5 prompt. The deliverable is a new Markdown artifact plus a concise source-analysis summary. Keep source observations separate from creative wording, and state the inspection scope when frame-by-frame generation has not been performed.
+Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedance 2.5 prompt. The deliverable is a new Markdown artifact containing only the pasteable prompt blocks. Give the concise source-analysis summary in chat and store calibration evidence in the iteration log, never inside the pasteable artifact. Keep source observations separate from creative wording, and state the inspection scope when frame-by-frame generation has not been performed.
 
 ## Probe The Source
 
@@ -19,6 +19,9 @@ Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedan
 
 - Create a new artifact; preserve earlier round files and logs.
 - Use the source's original playback order. Treat blank lines as independent generation submissions.
+- Enforce the approved output contract on every block. Start with `对应这个视频使用X张人物参考图，角色均为原创虚构的成年人物...`, list each active reference mapping inline, continue directly with the complete scene description and continuity, add the clean-frame wording, then write exactly one continuous `【画面内容】` paragraph. The whole block is self-contained.
+- The pasteable artifact contains no title, source-analysis section, usage notes, settings, global preamble, block heading, calibration record, or prose outside the independent prompt blocks. Put those materials in chat or the iteration log.
+- Do not place a global reference declaration in its own paragraph. Repeat the full declaration inside every independent block, including later blocks, because each blank-line-separated block is submitted by itself.
 - Fill each block toward the Seedance 2.5 generation capacity of about 30 seconds. Use the minimum block count required by the source duration. Move a boundary earlier only to finish a complete line, gesture-response pair, hard cut, location change, or dramatic beat. A final remainder block may be shorter.
 - Keep visible timestamps, percentages, block labels, shot numbers, and timing tables out of the copy-ready prompt.
 - Repeat the complete reference-image binding and active scene continuity at the start of every independent block. Use exactly the number of supplied reference images that the source and user setup require; never add a third reference merely because a background or supporting role appears. Use the user's labels such as A/B/C/D for reference images; keep source dialogue names and relationships as observed, and do not invent names from prior rounds.
