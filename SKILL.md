@@ -22,7 +22,7 @@ Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedan
 - Enforce the approved output contract on every block. Start with `对应这个视频使用X张人物参考图，角色均为原创虚构的成年人物...`, list each active reference mapping inline, continue directly with the complete scene description and continuity, add the clean-frame wording, then write exactly one continuous `【画面内容】` paragraph. The whole block is self-contained.
 - The pasteable artifact contains no title, source-analysis section, usage notes, settings, global preamble, block heading, calibration record, or prose outside the independent prompt blocks. Put those materials in chat or the iteration log.
 - Do not place a global reference declaration in its own paragraph. Repeat the full declaration inside every independent block, including later blocks, because each blank-line-separated block is submitted by itself.
-- Fill each block toward the Seedance 2.5 generation capacity of about 30 seconds. Use the minimum block count required by the source duration. Move a boundary earlier only to finish a complete line, gesture-response pair, hard cut, location change, or dramatic beat. A final remainder block may be shorter.
+- Fill each block toward the Seedance 2.5 generation capacity of about 30 seconds. Use the minimum block count required by the source duration. Treat a container duration up to about one second beyond a 30-second multiple as boundary tolerance when the complete closing beat still belongs in the same submission; for example, an accepted 30.386-second dialogue remains one block rather than creating a nearly empty second block. Move a boundary earlier only to finish a complete line, gesture-response pair, hard cut, location change, or dramatic beat. A final remainder block may be shorter.
 - Keep visible timestamps, percentages, block labels, shot numbers, and timing tables out of the copy-ready prompt.
 - Repeat the complete reference-image binding and active scene continuity at the start of every independent block. Use exactly the number of supplied reference images that the source and user setup require; never add a third reference merely because a background or supporting role appears. Use the user's labels such as A/B/C/D for reference images; keep source dialogue names and relationships as observed, and do not invent names from prior rounds.
 - State that referenced characters are original fictional adults and keep identity, clothing, hairstyle, body position, phone/props, lighting, and eyelines continuous across cuts. Background extras use no additional character references unless the user supplies them.
@@ -30,7 +30,7 @@ Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedan
 - Prioritize renderable emotional evidence: brow and eyelid changes, gaze direction, blinking, mouth corners, jaw tension, breath interruptions, hand pressure, shoulder release, interrupted movement, physical distance, delayed reactions, and held silence. Attach every detail to the shot where it is visible.
 - Preserve hard cuts, shot-reverse-shot ownership, inserts, screen point of view, and prop handoffs. Assign dialogue from mouth movement and adjacent reaction frames, not subtitle placement alone. Keep music lyrics separate from spoken dialogue.
 - Match source time of day, weather, color temperature, and spatial layout exactly unless the user explicitly requests a creative override. When an override exists, carry it through all affected blocks and label it in the analysis as user-authored. Exclude subtitles, text overlays, platform UI, watermarks, and brand marks from the generated frame.
-- Preserve Mandarin lip sync, clean frame, natural pauses, reaction silence, and ordinary live-action short-drama texture.
+- Preserve Mandarin lip sync, clean frame, natural pauses, reaction silence, and the source media grammar. Match the observed live-action, anime, 3D/CG, phone-video, or polished short-drama texture instead of converting every source to live action.
 
 ## Accuracy Corrections From User-Reviewed Rounds
 
@@ -71,7 +71,7 @@ Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedan
 
 - Classify the editorial form before writing the beat map: single-scene dialogue, intercut dialogue, day-in-the-life montage, insert-heavy product or pet sequence, or recorded-screen material. A fast lifestyle diary may contain many hard cuts while still being one chronological story arc.
 - Treat automatic scene candidates as evidence of visual changes only. They are not generation boundaries. First group adjacent cuts into narrative units such as morning routine, car banter, prank, gift exchange, pet care, and dinner; then fit the minimum number of independent submissions required by the source duration.
-- Calculate the minimum 30-second block count with `ceil(source_duration / 30)`. For a source close to an exact multiple, keep each rolling block near capacity and let a boundary cross a short insert when that preserves the complete joke, line, reaction, or daily-routine unit. A hard cut by itself is not a reason to start a new block.
+- Calculate the provisional 30-second block count from source duration, then apply the one-second boundary tolerance for container tails and complete closing beats. For a source close to an exact multiple, keep each rolling block near capacity and let a boundary cross a short insert when that preserves the complete joke, line, reaction, or daily-routine unit. A hard cut or location change by itself is not a reason to start a new block.
 - In a montage block, write a compact chain of executable beats in playback order: framing and camera position, visible action, prop continuity, expression or body reaction, then spoken line only when mouth movement or reliable audio supports it. Preserve the rapid rhythm instead of forcing every cut into shot-reverse-shot dialogue.
 - Audit the first seconds independently before drafting the first block. Record the initial empty or occluded frame, the exact reveal mechanism, the first subject's entry direction, and the first interaction. Never replace a curtain reveal, door opening, object uncovering, or side-entry choreography with a generic two-person opening.
 - When a character enters from off-screen, specify screen side, travel direction, body rotation or turn, where the character stops, and the final relation to the already visible subject. Entry choreography is a story beat and must survive into the prompt.
@@ -91,6 +91,24 @@ Use this skill for local MP4/MOV reconstruction into a directly pasteable Seedan
 - Add story-bearing atmosphere once per narrative unit after the concrete layout. Describe the social energy through an observable contrast such as a couple treating household chores as a playful power contest, a performative gift reveal, or a husband using pet care to compete for attention. Return immediately to renderable action, expression, eyeline, and dialogue.
 - Maintain a calibration loop until the user says the iteration is finished. Keep the source-fact sheet, creative-override sheet, and user-feedback classification for every new round; update the skill only from repeated or clearly demonstrated failures, and preserve earlier round artifacts.
 
+## Accepted Baseline From Round 11
+
+- A short source may contain a major location change and still remain one independent block. Keep a night-car argument and its bright-living-room resolution together when the source is approximately one generation capacity and the second scene completes the same dramatic beat.
+- For a dialogue-led source, write every short reply, interjection, split clause, and final question into the dialogue coverage matrix before prose. The accepted 30.386-second baseline retained 19 spoken beats and ended on the source's unanswered question rather than inventing a response.
+- Carry appearance and wardrobe state across a location cut only when the frames support continuity. Avoid wording that implies a costume change when the characters simply move to a new location.
+- Describe relationship energy through observable staging: a driver looking forward while a passenger turns suspicious, crossed arms after an argument, a glasses adjustment before answering, shoulders releasing on acceptance, or a pointing finger that turns reconciliation into another challenge.
+- Match animation or CG sources as animation or CG. The clean-frame rule removes source subtitles and platform overlays without erasing the source's visual medium.
+
+## Deterministic Validation
+
+After drafting the pasteable artifact, run `scripts/validate_prompt.ps1`. Supply the expected block count, reference count, and a UTF-8 dialogue checklist containing one required spoken beat per line when the source has dialogue:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/validate_prompt.ps1 -PromptPath PATH -ExpectedBlocks 1 -ExpectedReferences 2 -DialogueChecklistPath DIALOGUE_FILE
+```
+
+Treat any reported error as a completion blocker. This script validates the pasteable contract and exact dialogue presence; visual coverage still requires the cut-ledger and dense-frame review.
+
 ## Quality Check
 
 Before delivery, confirm:
@@ -102,7 +120,7 @@ Before delivery, confirm:
 - Dialogue speaker, source names, relationships, scene order, day/night state, and prop continuity agree with the inspected media.
 - Weather layer (source or creative override), numeric facts, reference count, internal-versus-spoken delivery, deceptive behavior, and reveal camera direction have each received an explicit verification pass.
 - The final artifact is linked with its absolute filesystem path and the verification scope is stated.
-- The editorial form is named in the analysis, automatic hard cuts are not mistaken for submission boundaries, and the minimum block count follows the exact source duration.
+- The editorial form is named in the analysis, automatic hard cuts are not mistaken for submission boundaries, and the minimum block count follows the source duration plus the documented one-second boundary tolerance.
 - For montage material, every block contains a complete chain of visible beats, while graphic text, spoken dialogue, and inferred story meaning remain separate.
 - Every cut-ledger row has a matching prompt action, every block's first and last three seconds were densely inspected, and wardrobe changes plus prop handoffs agree with the source frames.
 - Every action-triggered reply has been checked in the 1.5-2-second post-action window against at least two of ASR, source caption, audio, and visible mouth movement; the dialogue coverage matrix has no unmatched spoken beat.
