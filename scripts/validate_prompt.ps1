@@ -44,7 +44,20 @@ $identityPattern = @(
 $contentTagPattern = '\u3010\u753b\u9762\u5185\u5bb9\u3011'
 $cleanFramePatterns = @('\u6392\u9664\u5b57\u5e55', '\u6c34\u5370', '\u5e73\u53f0\u754c\u9762')
 $referenceLabels = @(
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'
+    [char]0x4e00, [char]0x4e8c, [char]0x4e09, [char]0x56db, [char]0x4e94,
+    [char]0x516d, [char]0x4e03, [char]0x516b, [char]0x4e5d, [char]0x5341
+)
+$referenceRolePatterns = @(
+    ([char]0x7537 + [char]0x4e3b + 'A'),
+    ([char]0x5973 + [char]0x4e3b + 'B'),
+    ([char]0x89d2 + [char]0x8272 + 'C'),
+    ([char]0x89d2 + [char]0x8272 + 'D'),
+    ([char]0x89d2 + [char]0x8272 + 'E'),
+    ([char]0x89d2 + [char]0x8272 + 'F'),
+    ([char]0x89d2 + [char]0x8272 + 'G'),
+    ([char]0x89d2 + [char]0x8272 + 'H'),
+    ([char]0x89d2 + [char]0x8272 + 'I'),
+    ([char]0x89d2 + [char]0x8272 + 'J')
 )
 
 for ($index = 0; $index -lt $blocks.Count; $index++) {
@@ -80,6 +93,12 @@ for ($index = 0; $index -lt $blocks.Count; $index++) {
         $referencePattern = '\u53c2\u8003\u56fe' + [regex]::Escape($referenceLabel)
         if ($block -notmatch $referencePattern) {
             $errors.Add("Block $blockNumber is missing reference mapping $referenceIndex.")
+        }
+        if ($referenceIndex -le $referenceRolePatterns.Count) {
+            $rolePattern = [string]$referenceRolePatterns[$referenceIndex - 1]
+            if ($block -notmatch $rolePattern) {
+                $errors.Add("Block $blockNumber is missing role mapping $referenceIndex ($rolePattern).")
+            }
         }
     }
 
