@@ -44,8 +44,7 @@ $identityPattern = @(
 $contentTagPattern = '\u3010\u753b\u9762\u5185\u5bb9\u3011'
 $cleanFramePatterns = @('\u6392\u9664\u5b57\u5e55', '\u6c34\u5370', '\u5e73\u53f0\u754c\u9762')
 $referenceLabels = @(
-    [char]0x4e00, [char]0x4e8c, [char]0x4e09, [char]0x56db, [char]0x4e94,
-    [char]0x516d, [char]0x4e03, [char]0x516b, [char]0x4e5d, [char]0x5341
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'
 )
 
 for ($index = 0; $index -lt $blocks.Count; $index++) {
