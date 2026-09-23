@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dola Seedance"
+  short_description: "审查并优化安全、连贯且不含生成时长描述的 Seedance 视频提示"
+  default_prompt: "使用 $dola-seedance 优化我的视频创意，只返回可直接使用且不含视频、镜头或动作时长描述的最终提示。"
